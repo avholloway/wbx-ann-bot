@@ -5,8 +5,6 @@ import FormData from 'form-data';
 import { promisify } from 'util';
 import { NodeHtmlMarkdown } from 'node-html-markdown';
 
-const admin_room = 'your admin room ID here';
-
 export default defineComponent({
   async run({ steps, $ }) {
 
@@ -62,6 +60,9 @@ export default defineComponent({
       }
     }
 
+    const admin_room = process.env.ANNOUNCE_ADMIN_ROOM;
+    log({admin_room});
+    
     const webhook = steps.trigger.event.body;
     log({webhook});
 

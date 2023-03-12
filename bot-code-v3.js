@@ -13,7 +13,7 @@ export default defineComponent({
       headers: {
         'Authorization': `Bearer ${process.env.ANNOUNCE_BOT_TOKEN}`
       },
-      timeout: { request: 5000 },
+      timeout: { request: 30000 },
       retry: {
         methods: [...got.defaults.options.retry.methods, 'POST'],
         maxRetryAfter: 60

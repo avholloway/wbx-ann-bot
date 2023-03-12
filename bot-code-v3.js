@@ -171,8 +171,8 @@ export default defineComponent({
         if (file_size > 104857600)
           throw('HTTPError 500 - Maximum upload size of 100MB exceeded');
 
-        if (file_size > 31457280)
-          await respond('☣️ Malware scanning can take a a while on larger files');
+        if (file_size > 52428800)
+          await respond('☣️ Malware scanning can take a while on larger files');
 
         ({ 'content-disposition': file_name } = headers);
       } catch(error) {

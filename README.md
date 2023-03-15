@@ -6,7 +6,7 @@ Sign up for a free account at the below site.
 https://pipedream.com/auth/signup
 
 ## Create a Webex Bot
-Login to the Webex Developer site, and create a bot using the following settings.
+Login to the Webex Developer site, and create a bot filling in the required fields.
 
 https://developer.webex.com/my-apps
 

@@ -10,11 +10,12 @@ Login to the Webex Developer site, and create a bot using the following settings
 
 https://developer.webex.com/my-apps
 
-Setting	Example Value
-Bot name	Anthony Announces
-Bot username	anthonyannounces
-Icon	Upload custom or choose a default one
-App Hub Description	Anthony Holloway’s Personal Announcement Bot
+|       Setting       |                Example Value                 |
+|---------------------|----------------------------------------------|
+| Bot name            | Anthony Announces                            |
+| Bot username        | anthonyannounces                             |
+| Icon                | Upload custom or choose a default one        |
+| App Hub Description | Anthony Holloway’s Personal Announcement Bot |
 
 Store Your Bot Token in Pipe Dream
 After you create your bot, copy the access token, and then login to pipedream.com, and goto:

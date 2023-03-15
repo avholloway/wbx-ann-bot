@@ -67,7 +67,7 @@ Click the small white plus sign in the small grey box to add a new step, and sel
 
 **Run custom code**
 
-Copy and paste the bot code from this github repository, into the code editor in pipedream, replacing all of the default code which showed up in pipedream by default.
+Copy and paste [the bot code](bot-code.js) from this github repository, into the code editor in pipedream, replacing all of the default code which showed up in pipedream by default.
 
 To finish, click on:
 

@@ -120,6 +120,15 @@ Create a new space with you, the bot, and optionally: anyone else who you’d li
 Inside of your Admin space, mention the bot by name, and then type out your test message and send it.
 
 _Note: The code imposes a minimum of 10 words, in order for it to announce your message to all spaces. This protects you from messing up a command to the bot, and the bot mistakenly thinking you meant to send that message to all spaces. You can adjust that value in the code if you prefer a smaller or larger word count._
+
+## Commands Your Bot Understands
+You can ask your bot for some info; just mention your bot in the Admin space, and send one of the following commands:
+
+Command	Output
+/help	Displays this help
+/rooms	Displays a list of rooms I am in (not including this room)
+/spaces	Alias for /rooms
+/reach	Displays a count of all spaces and all people who I can reach
  
 ## Limitations
 ### File Attachments
@@ -128,5 +137,3 @@ File attachments are currently supported; however, the Webex API limits us to 1 
 This is a low scale, low volume solution, hence the free account on pipedream.com.  Presently, if you add the bot to more than 100 spaces, the bot will not only be slow (especially if sending a 100MB file), due to how many spaces it has to message, but only a random set of 100 spaces from the total spaces list will be used.  If you need truly large scale mass messaging, this is not the solution for you.  Feel free to build upon what you have so far.
 ### Free Pipedream Account
 The free account let’s you post quite a bit, but there are limits.  Note that the limits specified really do not apply to how many spaces you can send to, rather, it’s how many messages you send to your bot.  If you feel like you need more, you can always pay for more: https://pipedream.com/pricing
-
-![image](https://user-images.githubusercontent.com/19751673/225369438-6e7cc38b-8e9f-4426-a829-67ea50af37a9.png)

@@ -124,11 +124,11 @@ _Note: The code imposes a minimum of 10 words, in order for it to announce your 
 ## Commands Your Bot Understands
 You can ask your bot for some info; just mention your bot in the Admin space, and send one of the following commands:
 
-Command	Output
-/help	Displays this help
-/rooms	Displays a list of rooms I am in (not including this room)
-/spaces	Alias for /rooms
-/reach	Displays a count of all spaces and all people who I can reach
+| Command | Output                                                        |
+| /help   | Displays this help                                            |
+| /rooms  | Displays a list of rooms I am in (not including this room)    |
+| /spaces | Alias for /rooms                                              |
+| /reach  | Displays a count of all spaces and all people who I can reach |
  
 ## Limitations
 ### File Attachments

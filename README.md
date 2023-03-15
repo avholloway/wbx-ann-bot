@@ -110,7 +110,7 @@ https://developer.webex.com/docs/api/v1/webhooks/create-a-webhook
 | filter    | personEmail=_paste your bot’s email address here_ |
 
 _Bot Email Address:
-This are just your bot’s username followed by “@webex.bot”_
+This is just your bot’s username followed by “@webex.bot”_
 
 _Example filter: personEmail=anthonyannounces@webex.bot_
 

@@ -52,6 +52,19 @@ _Note: The Name value must match exactly, as the code will look for it by this n
 | Name    | ANNOUNCE_ADMIN_ROOM                      |
 | Value   | _paste your admin room ID in this field_ |
 
+## Create and Store Webhook Secret
+
+While we're already in the environment variables spot on pipedream.com, let's create our Webhook secret.
+
+**Settings > Environment Variables > New Environment Variable**
+
+_Note: The Name value must match exactly, as the code will look for it by this name_
+
+| Setting |           Value                 |
+|---------|---------------------------------|
+| Name    | ANNOUNCE_SECRET                 |
+| Value   | _any secret code word you want_ |
+
 ## Create a Pipe Dream Workflow
 Login to pipdream.com and goto:
 
@@ -91,6 +104,7 @@ https://developer.webex.com/docs/api/v1/webhooks/create-a-webhook
 | resource  | messages                                                        |
 | event     | created                                                         |
 | filter    | mentionedPeople=me&roomId=_paste your admin room id on the end_ |
+| secret    | _your secret word_                                              |
 
 _Example filter: mentionedPeople=me&roomId=Y2lzY29zcGFyazovL3VzL1JPT00vYzc3YWIyNDAtYjkyYy0xMWVkLTg2NTItMDdmMTM2ZTJhNzdk_
 
@@ -103,11 +117,12 @@ https://developer.webex.com/docs/api/v1/webhooks/create-a-webhook
 
 |  Setting  |                       Value                       |
 |-----------|---------------------------------------------------|
-| name      | New Membership                                    |
+| name      | New Memberships                                   |
 | targetUrl | _paste your pipedream url in this field_          |
 | resource  | memberships                                       |
 | event     | created                                           |
 | filter    | personEmail=_paste your bot’s email address here_ |
+| secret    | _your secret word_                                |
 
 _Bot Email Address:
 This is just your bot’s username followed by “@webex.bot”_

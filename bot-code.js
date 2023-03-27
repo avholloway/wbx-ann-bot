@@ -9,6 +9,14 @@ export default defineComponent({
   async run({ steps, $ }) {
 
     const log = (...msg) => console.log('INFO:', ...msg);
+    
+    const sender_hash = steps.trigger.event.headers["x-spark-signature"];
+    const computed_hash = crypto
+      .createHmac('sha1', process.env.ANNOUNCE_SECRET)
+      .update(JSON.stringify(steps.trigger.event.body))
+      .digest('hex');
+    if (sender_hash !== computed_hash)
+      return $.flow.exit('Unauthorized Webhook: Secret Mismatch');
 
     const bot_token = process.env.ANNOUNCE_BOT_TOKEN;
     if (!bot_token)

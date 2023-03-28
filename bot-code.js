@@ -1,5 +1,6 @@
 import fs from 'fs';
 import got from 'got';
+import crypto from 'crypto';
 import stream from 'stream';
 import FormData from 'form-data';
 import { promisify } from 'util';

@@ -130,11 +130,11 @@ This is just your bot’s username followed by “@webex.bot”_
 _Example filter: personEmail=anthonyannounces@webex.bot_
 
 ## Take Your Bot for a Test Drive
-Create a new space with you, the bot, and optionally: anyone else who you’d like to test with, and notice in the Admin space you are alerted to this new membership.
+Create a new space with you, the bot, and optionally anyone else who you’d like to test with.  Now, notice in the Admin space, that you are alerted to this new membership!
 
-Inside of your Admin space, mention the bot by name, and then type out your test message and send it.
+Inside of your Admin space, mention the bot by name, use the `/send` command, and then type out your test message and send it.
 
-_Note: The code imposes a minimum of 10 words, in order for it to announce your message to all spaces. This protects you from messing up a command to the bot, and the bot mistakenly thinking you meant to send that message to all spaces. You can adjust that value in the code if you prefer a smaller or larger word count._
+_Note: The code imposes a minimum of word count, in order for it to announce your message to all spaces. This protects you from messing up a command to the bot, and the bot mistakenly thinking you meant to send that message to all spaces. You can adjust that value in the code if you prefer a smaller or larger word count._
 
 ## Commands Your Bot Understands
 You can ask your bot for some info; just mention your bot in the Admin space, and send one of the following commands:
@@ -145,10 +145,16 @@ You can ask your bot for some info; just mention your bot in the Admin space, an
 | /rooms  | Displays a list of rooms I am in (not including this room)    |
 | /spaces | Alias for /rooms                                              |
 | /reach  | Displays a count of all spaces and all people who I can reach |
+| /test   | Sends your message into the Admin space as a test (dry run)   |
+| /send   | Sends your message into all of the spaces (production)        |
  
 ## Limitations
 ### File Attachments
 File attachments are currently supported; however, the Webex API limits us to 1 attachment only during a message post, and a maximum upload size of 100MB.  It might be a better option to just send a link to the file instead, but it’s up to you.
+### Enterprise Content Management (ECM)
+Don't expect ECM files shared to the bot to work, these simply do not work.
+### Bitmoji
+Unknown support for this, since I do not use it myself.
 ### Maximum Spaces
 This is a low scale, low volume solution, hence the free account on pipedream.com.  Presently, if you add the bot to more than 100 spaces, the bot will not only be slow (especially if sending a 100MB file), due to how many spaces it has to message, but only a random set of 100 spaces from the total spaces list will be used.  If you need truly large scale mass messaging, this is not the solution for you.  Feel free to build upon what you have so far.
 ### Free Pipedream Account

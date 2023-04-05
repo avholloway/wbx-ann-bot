@@ -15,6 +15,7 @@ export default defineComponent({
 
     // custom logging function which takes infinite parameters of things to log
     const log = (...msg) => console.log('INFO:', ...msg);
+    log("start of webhook processing")
     
     // authenticated webhook processing
     // json body is hashed using a known secret when setting up webhook
@@ -29,7 +30,7 @@ export default defineComponent({
 
     // if the hashes do not match, then the secrets do not match, therefore, we do not trust this message
     if (sender_hash !== computed_hash)
-      return $.flow.exit('Secret Mismatch: Unauthorized message sent to us; ignoring it.');
+      return $.flow.exit('Secret Mismatch: An unauthorized message was sent to us.');
 
     // in order for this bot to be useful, it must be able to post messages
     // so let's see if the bot's access token was stored for us to use

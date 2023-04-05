@@ -1,5 +1,7 @@
 # Personal Webex Announcement Bot
 
+This document, and the accompanying bot program, are here to help you build your own bot.  Feel free to use this as a starting point, and then customize your bot with extra features, which will suit your needs best.
+
 ## Create a Free Pipe Dream Account
 Sign up for a free account at the below site.
 

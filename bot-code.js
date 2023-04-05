@@ -9,7 +9,7 @@ import { NodeHtmlMarkdown } from 'node-html-markdown';
 export default defineComponent({
   async run({ steps, $ }) {
 
-    // if you type /send test, should I send it?  Set this value to some minimum
+    // if you type /send hello world, should I send it?  Set this value to some minimum
     // number of words I should expect from you, in order for me to send it out
     const MINIMUM_WORD_COUNT = 3;
 
@@ -359,7 +359,7 @@ export default defineComponent({
     // will send out test message to (not a threaded message either)
     if (/^\/test/.test(source_message)) {
       log('/test command');
-      source_message = source_message.replace('/test ', '');
+      source_message = source_message.replace('/test ', '**THIS IS A TEST MESSAGE ONLY SENT TO THIS ROOM.  REPLACE /test WITH /send TO GO LIVE.**\n');
       rooms = [{id: admin_room, title: 'This Admin Room'}];
 
     // however, if this is not a drill, then we need a complete room list

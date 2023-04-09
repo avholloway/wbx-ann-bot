@@ -110,8 +110,8 @@ https://developer.webex.com/docs/api/v1/webhooks/create-a-webhook
 
 _Example filter: mentionedPeople=me&roomId=Y2lzY29zcGFyazovL3VzL1JPT00vYzc3YWIyNDAtYjkyYy0xMWVkLTg2NTItMDdmMTM2ZTJhNzdk_
 
-## Create a Webhook to Know When Your Bot is Added to a Room
-Login to the Webex Developer site, and create a webhook using the following settings.
+## Create a Webhook to Know When Your Bot is Added or Removed to/from a Room
+Login to the Webex Developer site, and create two webhooks using the following settings.
 
 _TIP: You will need to swap over to your Bot’s access token, otherwise, this will create the webhook for you and not for your bot._
 
@@ -123,6 +123,15 @@ https://developer.webex.com/docs/api/v1/webhooks/create-a-webhook
 | targetUrl | _paste your pipedream url in this field_          |
 | resource  | memberships                                       |
 | event     | created                                           |
+| filter    | personEmail=_paste your bot’s email address here_ |
+| secret    | _your secret word_                                |
+
+|  Setting  |                       Value                       |
+|-----------|---------------------------------------------------|
+| name      | Deleted Memberships                               |
+| targetUrl | _paste your pipedream url in this field_          |
+| resource  | memberships                                       |
+| event     | deleted                                           |
 | filter    | personEmail=_paste your bot’s email address here_ |
 | secret    | _your secret word_                                |
 

@@ -15,7 +15,7 @@ export default defineComponent({
 
     // custom logging function which takes infinite parameters of things to log
     const log = (...msg) => console.log('INFO:', ...msg);
-    log("start of webhook processing")
+    log("start of webhook processing");
     
     // authenticated webhook processing
     // json body is hashed using a known secret when setting up webhook
@@ -29,20 +29,17 @@ export default defineComponent({
       .digest('hex');
 
     // if the hashes do not match, then the secrets do not match, therefore, we do not trust this message
-    if (sender_hash !== computed_hash)
-      return $.flow.exit('Secret Mismatch: An unauthorized message was sent to us.');
+    if (sender_hash !== computed_hash) return $.flow.exit('Secret Mismatch: An unauthorized message was sent to us.');
 
     // in order for this bot to be useful, it must be able to post messages
     // so let's see if the bot's access token was stored for us to use
     const bot_token = process.env.ANNOUNCE_BOT_TOKEN;
-    if (!bot_token)
-      return $.flow.exit('environment variable missing or empty: ANNOUNCE_BOT_TOKEN');
+    if (!bot_token) return $.flow.exit('environment variable missing or empty: ANNOUNCE_BOT_TOKEN');
 
     // another key aspect of this bot is the admin room, so let's see if we have
     // the admin room id, to be able to communicate with the admins
     const admin_room = process.env.ANNOUNCE_ADMIN_ROOM;
-    if (!admin_room)
-      return $.flow.exit('environment variable missing or empty: ANNOUNCE_ADMIN_ROOM');
+    if (!admin_room) return $.flow.exit('environment variable missing or empty: ANNOUNCE_ADMIN_ROOM');
 
     // we be sending quite a few web requests to webex, so let's setup some defaults
     const webex_api_options = {
@@ -64,7 +61,7 @@ export default defineComponent({
     // the prefixUrl, as it's different for file downloads
     const got_file_client = got.extend({
       ...webex_api_options,
-      prefixUrl: '',
+      prefixUrl: ''
     });
 
     // let's setup a convenience function for sending messages into a room
@@ -119,16 +116,15 @@ export default defineComponent({
     log({webhook});
 
     // we only support these two webhook resources
-    if (!['memberships', 'messages'].includes(webhook.resource))
-      return $.flow.exit(`resource of ${webhook.resource} not expected`);
+    if (!['memberships', 'messages'].includes(webhook.resource)) return $.flow.exit(`resource of ${webhook.resource} not expected`);
 
-    // we only support this one event which represents a new message or being added to a new room
-    if (webhook.event !== 'created')
-      return $.flow.exit(`event type of ${webhook.event} not expected`);
+    // we only support these two webhook events 
+    if (!['created', 'deleted'].includes(webhook.event)) return $.flow.exit(`event type of ${webhook.event} not expected`);
 
     // handle the first kind of resource we support
     if (webhook.resource === 'memberships') {
-      log('new membership notifiction');
+      log('membership change notification');
+      const action = webhook.event === 'created' ? 'added me to' : 'removed me from';
       try {
         // get the details of the person who added our bot to a new room
         const who = await got_api_client.get(`people/${webhook.actorId}`).json();
@@ -137,16 +133,15 @@ export default defineComponent({
         const where = await got_api_client.get(`rooms/${webhook.data.roomId}`).json();
 
         // alert the admins of this event
-        await alert(`📢 ${person_link(who)} added me to ${room_link(where)}`);
+        await alert(`📢 ${person_link(who)} ${action} ${room_link(where)}`);
       } catch(error) {
         log({body: error.response?.body}, {error});
       }
-      return $.flow.exit('our bot was added to a space');
+      return $.flow.exit(`membership change processed`);
     }
 
     // processing messages from other bots can cause loops, so we'll just ignore them
-    if (/@webex\.bot$/.test(webhook.data.personEmail))
-      return $.flow.exit('this is a message from another bot, ignore it');
+    if (/@webex\.bot$/.test(webhook.data.personEmail)) return $.flow.exit('this is a message from another bot, ignore it');
 
     // we'll need the message id from the webhook, which is the message an admin sent
     // for us to process, for two reasons: to get the message text, and to reply to it
@@ -213,14 +208,14 @@ export default defineComponent({
     log('post-transformed: ', {source_message});
 
     if (/^\/help/.test(source_message)) {
-      log('/help command')
+      log('/help command');
       const commands = [
         ['/help',   'Displays this help'],
         ['/rooms',  'Displays a list of rooms I am in (not including this room)'],
         ['/spaces', 'Alias for \`/rooms\`'],
         ['/reach',  'Displays a count of all spaces and all people who I can reach'],
         ['/test',   'Sends a test broadcast message into this room'],
-        ['/send',   'Sends a broadcast message to all the spaces I am in'],
+        ['/send',   'Sends a broadcast message to all the spaces I am in']
       ].map(command => `* \`${command[0]}\` - ${command[1]}`).join('\n');
 
       await respond(`🤖 These are the commands I know:\n${commands}`);
@@ -238,7 +233,7 @@ export default defineComponent({
     // however, it will dedupe people who show up in more than one space, as well as
     // exclude any bot accounts it finds, giving a more accurate reach number
     if (/^\/reach/.test(source_message)) {
-      log('/reach command')
+      log('/reach command');
       let people = [], rooms = await room_list();
 
       for (const room of rooms) {
@@ -297,13 +292,11 @@ export default defineComponent({
         log({file_size});
 
         // didn't even need to download the file, in order to reject it based on size
-        if (file_size > 104857600)
-          throw('HTTPError 500 - Maximum upload size of 100MB exceeded');
+        if (file_size > 104857600) throw('HTTPError 500 - Maximum upload size of 100MB exceeded');
 
         // the malware scanning is poorly implemented, so i made a choice to let the admins know
         // that this medium file size attachment might take a while to process
-        if (file_size > 52428800)
-          await respond('☣️ Malware scanning can take a while on larger files');
+        if (file_size > 52428800) await respond('☣️ Malware scanning can take a while on larger files');
 
         ({ 'content-disposition': file_name } = headers);
       } catch(error) {
@@ -334,10 +327,7 @@ export default defineComponent({
       while (true) {
         log('attempting to download and save attachment');
         try {
-          await download_and_save(
-            got_file_client.stream(file_url),
-            fs.createWriteStream(file_path)
-          );
+          await download_and_save(got_file_client.stream(file_url), fs.createWriteStream(file_path));
           break;
         } catch (error) {
           if (error.response?.statusCode === 423) {
@@ -379,8 +369,7 @@ export default defineComponent({
       form_data.append('roomId', room.id);
       form_data.append('markdown', source_message);
 
-      if (files.length === 1)
-        form_data.append('files', fs.createReadStream(file_path));
+      if (files.length === 1) form_data.append('files', fs.createReadStream(file_path));
 
       try {
         log(`posting to ${room.title}`);

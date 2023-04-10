@@ -2,8 +2,6 @@
 
 This document, and the accompanying bot program, are here to help you build your own bot.  Feel free to use this as a starting point, and then customize your bot with extra features, which will suit your needs best.
 
-Do you have questions about this guide?  Is something not working?  [Reach out to me](webexteams://im?email=anhollow@cisco.com] on Webex Messaging, and I'll see if I can help.
-
 ## Create a Free Pipe Dream Account
 Sign up for a free account at the below site.
 
